@@ -397,6 +397,7 @@ def set_class_values(data):
 choice = input('''1. Вывод табличных данных
 2. Формирование графиков и отчетов
 ''')
+#внес изменения
 input_rows = InputCorrect()
 data_set = DataSet(input_rows.file_name)
 f_line, vacancies, empty = data_set.csv_reader(input_rows.file_name)
