@@ -394,7 +394,9 @@ def set_class_values(data):
         vacancies.append(vacancy)
     return vacancies
 
-
+choice = input('''1. Вывод табличных данных
+2. Формирование графиков и отчетов
+''')
 input_rows = InputCorrect()
 data_set = DataSet(input_rows.file_name)
 f_line, vacancies, empty = data_set.csv_reader(input_rows.file_name)
@@ -402,14 +404,16 @@ if not empty:
     data = data_set.csv_filer(f_line, vacancies)
     data_set.vacancies_objects = set_class_values(data)
     statistic = Statistics(data_set.vacancies_objects, input_rows.profession_name)
-    pl = Plot(statistic)
-    generate_pdf(statistic.profession_name, statistic)
-    print("{}: {}".format("Динамика уровня зарплат по годам", statistic.salary_by_years))
-    print("{}: {}".format("Динамика количества вакансий по годам", statistic.quantity_by_years))
-    print("{}: {}".format("Динамика уровня зарплат по годам для выбранной профессии", statistic.salary_by_profession))
-    print("{}: {}".format("Динамика количества вакансий по годам для выбранной профессии",
-                          statistic.quantity_by_profession))
-    print("{}: {}".format("Уровень зарплат по городам (в порядке убывания)", statistic.salary_by_cities))
-    print("{}: {}".format("Доля вакансий по городам (в порядке убывания)", statistic.share_of_cities))
+    if choice == "2":
+        pl = Plot(statistic)
+        generate_pdf(statistic.profession_name, statistic)
+    else:
+        print("{}: {}".format("Динамика уровня зарплат по годам", statistic.salary_by_years))
+        print("{}: {}".format("Динамика количества вакансий по годам", statistic.quantity_by_years))
+        print("{}: {}".format("Динамика уровня зарплат по годам для выбранной профессии", statistic.salary_by_profession))
+        print("{}: {}".format("Динамика количества вакансий по годам для выбранной профессии",
+                              statistic.quantity_by_profession))
+        print("{}: {}".format("Уровень зарплат по городам (в порядке убывания)", statistic.salary_by_cities))
+        print("{}: {}".format("Доля вакансий по городам (в порядке убывания)", statistic.share_of_cities))
 
 
